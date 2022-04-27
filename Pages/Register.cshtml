@@ -1,0 +1,29 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="text-center">
+    <h1>Create your Versine account</h1>
+    <form asp-action="form" method="post">
+        <div  class="myforma">
+            <label asp-for="Username" class="" >Choose an username:</label>
+            <input asp-for="Username" />
+        </div>
+        <div class="myforma">
+            <label asp-for="Password">Choose a password:</label>
+            <input asp-for="Password" type="password"/>
+        </div>
+        <div class="myforma">
+            <label asp-for="Ticket">Enter an invitation ticket:</label>
+            <input asp-for="Ticket" />
+        </div>
+        <div>
+            <p></p>
+            <button type="submit">Submit form</button>
+            <p></p>
+        </div>
+    
+    </form>
+</div>
