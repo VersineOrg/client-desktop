@@ -36,17 +36,6 @@ namespace client_desktop.Pages
         
         public async Task<IActionResult> OnPostAsync()
         {
-
-            // "UserData" BindProperty (see above) 
-            //  contains all the values entered by the user 
-
-            // process them here 
-
-            // . . . and redirect 
-            Console.WriteLine(Username);
-            Console.WriteLine(Password);
-            Console.WriteLine(Ticket);
-            
             using var client = new HttpClient();
             RegisterFormat bodyObject = new RegisterFormat()
             {
@@ -56,14 +45,14 @@ namespace client_desktop.Pages
             };
             string requestBody = JsonConvert.SerializeObject(bodyObject);
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
-            string baseurl = "http://localhost:8001";
-            var result = await client.PostAsync(baseurl + "/register", httpContent);
+            var result = await client.PostAsync("http://localhost:3000/register", httpContent);
             string? bodyString = await result.Content.ReadAsStringAsync();
-            Console.WriteLine(bodyString);
             dynamic json = JsonConvert.DeserializeObject(bodyString)!;
             
             StorageManager.storage.Store("token", json.data);
-            return RedirectToPage(new {msg = "Success!"});
+            StorageManager.storage.Store("username", Username);
+            
+            return RedirectToPage("/App", new { msg = "Success" });
 
         }
         

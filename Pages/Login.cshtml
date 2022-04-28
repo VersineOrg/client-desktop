@@ -7,20 +7,21 @@
 <div class="text-center">
     <h1>Login to your Versine account</h1>
     
-    <form asp-action="form" method="post">
-        <div  class="myforma">
-            <label asp-for="Username" class="" >Choose an username:</label>
-            <input asp-for="Username" />
-        </div>
-        <div class="myforma">
-            <label asp-for="Password">Choose a password:</label>
-            <input asp-for="Password" type="password"/>
-        </div>
-        <div>
-            <p></p>
-            <button type="submit">Submit form</button>
-            <p></p>
-        </div>
     
-    </form>
+   <form class="text-center" asp-action="form" method="post">
+   
+       <p class="h4 mb-4">Login</p>
+   
+       <input type="text" id="username" class="form-control mb-4" placeholder="Username" asp-for="Username">
+   
+       <input type="password" id="password" class="form-control mb-4" placeholder="Password" asp-for="Password">
+   
+   
+       <button class="btn btn-info btn-block my-4" type="submit">Login</button>
+   
+       <p>Doesn't have a Versine account?
+           <a href="/Register">Register</a>
+       </p>
+   
+   </form> 
 </div>

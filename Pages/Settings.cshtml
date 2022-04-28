@@ -1,0 +1,30 @@
+@page
+@model client_desktop.Pages.Settings
+
+@{
+    Layout = "_LayoutApp";
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Versine</title>
+    </head>
+<body>
+<div>
+    <h1>Settings:</h1>
+    <p></p>
+    <form method="POST">
+        <button type="submit" class="btn btn-dark" asp-route-data="foo" asp-page-handler="Logout">Logout</button>
+    </form>
+    <p></p>
+    <p></p>
+    <form method="POST">
+        <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="Delete">Delete My Account</button>
+    </form>
+    <p></p>
+    
+</div>
+</body>
+</html>

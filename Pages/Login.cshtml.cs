@@ -31,16 +31,6 @@ namespace client_desktop.Pages
         
         public async Task<IActionResult> OnPostAsync()
         {
-
-            // "UserData" BindProperty (see above) 
-            //  contains all the values entered by the user 
-
-            // process them here 
-
-            // . . . and redirect 
-            Console.WriteLine(Username);
-            Console.WriteLine(Password);
-            
             using var client = new HttpClient();
             LoginFormat bodyObject = new LoginFormat()
             {
@@ -49,12 +39,20 @@ namespace client_desktop.Pages
             };
             string requestBody = JsonConvert.SerializeObject(bodyObject);
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
-            var result = await client.PostAsync("http://localhost:8001/login", httpContent);
+            var result = await client.PostAsync("http://localhost:3000/login", httpContent);
             string bodyString = await result.Content.ReadAsStringAsync();
             dynamic json = JsonConvert.DeserializeObject(bodyString)!;
-            
-            StorageManager.storage.Store("token", json.data);
-            return RedirectToPage(new {msg = "Success!"});
+            if ((string) json.status == "success")
+            {
+                StorageManager.storage.Store("token", json.data);
+                StorageManager.storage.Store("username", Username);
+                        
+                return RedirectToPage("/App", new { msg = "Success" });    
+            }
+            else
+            {
+                return RedirectToPage("/Error", new { msg = "Invalid Credentials" });
+            }
 
         }
         public void OnGet()

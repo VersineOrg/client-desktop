@@ -1,0 +1,32 @@
+@page
+@model client_desktop.Pages.WritePost
+
+@{
+    Layout = "_LayoutApp";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Versine</title>
+    </head>
+<body>
+<div>
+    
+    <h1>Write a new post:</h1>
+    <form asp-action="form" method="post">
+        <div class="myforma">
+            <label asp-for="Content" class="">Write Your Post:</label>
+            <br/>
+            <textarea asp-for="Content" class="form-control rounded"></textarea>
+        </div>
+        <div>
+            <p></p>
+            <button type="submit">Submit form</button>
+            <p></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>
