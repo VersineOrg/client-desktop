@@ -30,7 +30,7 @@ namespace client_desktop.Pages
             };
             string requestBody = JsonConvert.SerializeObject(bodyObject);
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
-            string baseurl = "http://localhost:7000/user/delete";
+            string baseurl = "http://api.versine.fr/users/deleteUser";
             var result = await client.PostAsync(baseurl, httpContent);
             string? bodyString = await result.Content.ReadAsStringAsync();
             Console.WriteLine(bodyString);

@@ -30,7 +30,7 @@ namespace client_desktop.Pages
             };
             string requestBody = JsonConvert.SerializeObject(bodyObject);
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
-            string baseurl = "http://localhost:5000/addPost";
+            string baseurl = "http://api.versine.fr/posts/addPost";
             var result = await client.PostAsync(baseurl, httpContent);
             string? bodyString = await result.Content.ReadAsStringAsync();
             Console.WriteLine(bodyString);

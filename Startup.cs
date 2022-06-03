@@ -52,6 +52,7 @@ namespace client_desktop
             {
                 endpoints.MapRazorPages();
             });
+
             Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
         }
     }

@@ -3,28 +3,101 @@
 
 @{
     Layout = "_LayoutApp";
+    string Username = (string) StorageManager.storage.Get("username");
+    string Avatar = (string) StorageManager.storage.Get("avatar");
+    string Bio = (string) StorageManager.storage.Get("bio");
+    string Banner = (string) StorageManager.storage.Get("banner");
+    string Color = (string) StorageManager.storage.Get("color");
+    string Id = (string) StorageManager.storage.Get("id");
+
 }
 
-<!DOCTYPE html>
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+     <div class="navbar-item">
+    <a class="navbar-item button"  href="/App">
+     <i class="fas fa-arrow-left"></i>
+    </a>
+    </div>
 
-<html>
-    <head>
-        <title>Versine</title>
-    </head>
-<body>
-<div>
-    <h1>Settings:</h1>
-    <p></p>
-    <form method="POST">
-        <button type="submit" class="btn btn-dark" asp-route-data="foo" asp-page-handler="Logout">Logout</button>
-    </form>
-    <p></p>
-    <p></p>
-    <form method="POST">
-        <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="Delete">Delete My Account</button>
-    </form>
-    <p></p>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
     
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+            <i class="fa-solid fa-message"></i>
+          </a>
+
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Settings
+      </p>
+    </header>
+
+    <div class="card-content">
+
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img class="is-rounded" src="@Avatar" alt="Avatar">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">@Username</p>
+          <p class="subtitle is-6"><a href="#">@Username</a></p>
+        </div>
+      </div>
+      
+       <div class="buttons">
+        <form method="POST">
+          <button type="submit" class="btn btn-dark" asp-route-data="foo" asp-page-handler="Logout">
+            Logout
+          </button>
+        </form>
+
+        <form method="POST">
+          <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="Delete">
+            Delete My Account
+          </button>
+        </form>
+       </div>
+
+    </div>
+  </div>
 </div>
-</body>
-</html>

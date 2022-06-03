@@ -39,7 +39,7 @@ namespace client_desktop.Pages
             };
             string requestBody = JsonConvert.SerializeObject(bodyObject);
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
-            var result = await client.PostAsync("http://localhost:3000/login", httpContent);
+            var result = await client.PostAsync("https://api.versine.fr/door/login", httpContent);
             string bodyString = await result.Content.ReadAsStringAsync();
             dynamic json = JsonConvert.DeserializeObject(bodyString)!;
             if ((string) json.status == "success")

@@ -4,24 +4,80 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-    <h1>Login to your Versine account</h1>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="images/VersineBlack.png" height="60px">
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="/" class="navbar-item">
+        Home
+      </a>
+
     
-    
+     
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        
+<div class="buttons">
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+   <br>
+<div class="container is-fullhd">
+  <div class="notification">
+   <p class="title is-1">
+      <img class="image is-128x128" src="images/VersineLogoBlack.png">
+     </p>
+    <p class="subtitle is-3">Login into Versine:</p>
+  </div>
+  
+</div>
+<br>
+<div class="container">
+  <div class="section">
+        
+     
    <form class="text-center" asp-action="form" method="post">
-   
-       <p class="h4 mb-4">Login</p>
-   
-       <input type="text" id="username" class="form-control mb-4" placeholder="Username" asp-for="Username">
-   
-       <input type="password" id="password" class="form-control mb-4" placeholder="Password" asp-for="Password">
-   
-   
-       <button class="btn btn-info btn-block my-4" type="submit">Login</button>
-   
-       <p>Doesn't have a Versine account?
-           <a href="/Register">Register</a>
-       </p>
-   
-   </form> 
+      <div class="field">
+      <p class="control has-icons-left has-icons-right">
+         <input type="text" id="username" class="input" name="username" placeholder="Username" asp-for="Username">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+      
+      </p>
+    </div>
+    <div class="field">
+      <p class="control has-icons-left">
+         <input type="password" id="password" class="input" name="password" placeholder="Password" asp-for="Password">
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <p class="control">
+        <button class="button is-success">
+          Login
+        </button>
+      </p>
+    </div>
+  </form>
+ </div>
 </div>

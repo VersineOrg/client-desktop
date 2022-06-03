@@ -5,28 +5,77 @@
     Layout = "_LayoutApp";
 }
 
-<!DOCTYPE html>
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+     <div class="navbar-item">
+    <a class="navbar-item button"  href="/App">
+     <i class="fas fa-arrow-left"></i>
+    </a>
+    </div>
 
-<html lang="en">
-    <head>
-        <title>Versine</title>
-    </head>
-<body>
-<div>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
     
-    <h1>Write a new post:</h1>
-    <form asp-action="form" method="post">
-        <div class="myforma">
-            <label asp-for="Content" class="">Write Your Post:</label>
-            <br/>
-            <textarea asp-for="Content" class="form-control rounded"></textarea>
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+             <i class="fa-solid fa-message"></i>
+          </a>
+          
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
         </div>
-        <div>
-            <p></p>
-            <button type="submit">Submit form</button>
-            <p></p>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+            Write a new post
+            </p>
+        </header>
+        <div class="card-content">
+            <form asp-action="form" method="post">
+                <div class="field">
+                    <label class="label">Content</label>
+                    <div class="control">
+                        <textarea asp-for="Content" class="textarea" placeholder="Today I ate a banana"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <p></p>
+                    <button type="submit" class="button is-link">Post</button>
+                    <p></p>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+    
 </div>
-</body>
-</html>

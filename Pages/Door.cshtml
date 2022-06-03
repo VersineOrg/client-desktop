@@ -1,0 +1,67 @@
+@page
+@model DoorModel
+@{
+    ViewData["Title"] = "Door";
+}
+
+<!DOCTYPE html>
+ <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="images/VersineBlack.png" height="60px">
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="/" class="navbar-item">
+        Home
+      </a>
+
+    
+     
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        
+        <div class="buttons">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+    <br>
+<div class="container is-fullhd">
+  <div class="notification">
+   <p class="title is-1">
+      <img class="image is-128x128" src="images/VersineLogoBlack.png">
+     </p>
+<p class="subtitle is-3">Enter into Versine:</p>
+  </div>
+  
+    </div>
+    <br>
+    <div class="container">
+      <div class="section">
+        
+  <div class="buttons">
+
+  <a asp-area="" asp-page="/Register">
+    <button class="button is-primary">Register</button>
+  </a>
+
+  <a asp-area="" asp-page="/Login">
+    <button class="button">Login</button>
+  </a>
+</div>
+
+      </div>
+ </div>

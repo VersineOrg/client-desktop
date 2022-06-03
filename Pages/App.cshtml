@@ -3,18 +3,88 @@
 
 @{
     Layout = "_LayoutApp";
+    string Username = (string) StorageManager.storage.Get("username");
+    string Avatar = (string) StorageManager.storage.Get("avatar");
+    string Bio = (string) StorageManager.storage.Get("bio");
+    string Banner = (string) StorageManager.storage.Get("banner");
+    string Color = (string) StorageManager.storage.Get("color");
+    string Id = (string) StorageManager.storage.Get("id");
+
 }
 
-<!DOCTYPE html>
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+       <div class="navbar-item">
+        <a class="navbar-item button"  href="/App">
+         <i class="fa-solid fa-house"></i>
+        </a>
+      </div>
 
-<html>
-    <head>
-        <title>Versine</title>
-    </head>
-<body>
-<div>
-    <h1>Welcome To Versine:</h1>
-    <h3>You can navigate to the other pages</h3>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+            <i class="fa-solid fa-message"></i>
+          </a>
+
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+  <div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img class="is-rounded" src="@Avatar" alt="Avatar">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">@Username</p>
+          <p class="subtitle is-6"><a href="/Profile?username=@Username">@Username</a></p>
+        </div>
+        
+        <div class="buttons">
+          <a href="/Settings">
+            <button id="settings" class="button">
+              <i class="fas fa-sliders-h"></i>
+            </button>
+          </a>
+      </div>
+    </div>
+  </div>
 </div>
-</body>
-</html>

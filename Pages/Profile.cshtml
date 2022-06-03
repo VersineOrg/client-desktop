@@ -1,0 +1,103 @@
+@page
+@model ProfileModel
+
+@{
+    Layout = "_LayoutApp";
+    string Username = (string) StorageManager.storage.Get("queryUsername");
+    string Avatar = (string) StorageManager.storage.Get("queryAvatar");
+    string Bio = (string) StorageManager.storage.Get("queryBio");
+    string Banner = (string) StorageManager.storage.Get("queryBanner");
+    string Color = (string) StorageManager.storage.Get("queryColor");
+    string Id = (string) StorageManager.storage.Get("queryId");
+}
+
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+     <div class="navbar-item">
+    <a class="navbar-item button"  href="/App">
+     <i class="fas fa-arrow-left"></i>
+    </a>
+    </div>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+             <i class="fa-solid fa-message"></i>
+          </a>
+          
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-fullwidth">
+            <img src="@Banner" alt="Placeholder image">
+            </figure>
+        </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                        <img class="is-rounded" src="@Avatar" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">@Username</p>
+                        <p class="subtitle is-6">@Username</p>
+                    </div>
+                </div>
+                <div class="content">
+                    @Bio 
+                </div>
+                <footer class="card-footer">
+
+                    <form method="POST">
+                        <button type="submit" class="card-footer-item button is-info" asp-route-data="foo" asp-page-handler="Follow">
+                            Follow
+                        </button>
+                    </form>
+
+                    <form method="POST">
+                        <button type="submit" class="card-footer-item button is-primary" asp-route-data="foo" asp-page-handler="RequestFriend">
+                            Request Friend
+                        </button>
+                    </form>
+
+                </footer>
+        </div>
+    </div>
+</div>
