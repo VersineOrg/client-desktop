@@ -54,7 +54,7 @@
 </nav>
 
 <div class="container">
-    
+    <button id="circle" class="tag is-light">Primary</button> 
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
@@ -79,3 +79,11 @@
     </div>
     
 </div>
+
+<script>
+  var listItem = document.getElementById('circle');
+        listItem.addEventListener('click', function(event) {
+          this.classList.toggle('is-light');
+          this.classList.toggle('is-primary');
+        });
+</script>

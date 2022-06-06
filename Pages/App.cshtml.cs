@@ -51,6 +51,8 @@ namespace client_desktop.Pages
                 bool reading = false;
                 string currentId = "";
                 List<string> friends = new List<string>();
+
+
                 for (int i = 0; i < friendsString.Length; i++)
                 {
                     if (reading)
@@ -72,6 +74,7 @@ namespace client_desktop.Pages
                         }
                     }
                 }
+
                 StorageManager.storage.Store("friends", friends);
 
                 using var client2 = new HttpClient();

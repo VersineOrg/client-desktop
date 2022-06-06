@@ -1,0 +1,163 @@
+@page
+@model ManageCircleModel
+
+@{
+    Layout = "_LayoutApp";
+    string CurrentCircleName = (string) StorageManager.storage.Get("currentCircleName");
+    Newtonsoft.Json.Linq.JArray RemainingUsers = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("remainingUsers");
+    Newtonsoft.Json.Linq.JArray CircleUsers = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("circleUsers");
+}
+
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+     <div class="navbar-item">
+    <a class="navbar-item button"  href="/Circles">
+     <i class="fas fa-arrow-left"></i>
+    </a>
+    </div>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+            <i class="fa-solid fa-message"></i>
+          </a>
+
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+
+
+  <br>
+
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        ManageCircle: @CurrentCircleName
+      </p>
+    </header>
+
+    <div class="card-content">
+      <p class="title is-4">Users in this Circle:</p>
+      @foreach (dynamic user  in CircleUsers)
+      {
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img class="is-rounded" src="@user.avatar" alt="Avatar">
+                </figure>
+              </div>
+
+              <div class="media-content">
+                  <p class="title is-6">@user.username</p>
+                  <p class="subtitle is-6">
+                    <a href="/Profile?username=@user.username">
+                      @user.username
+                    </a>
+                  </p>
+              </div>
+
+            </div>
+              <div class="buttons">
+                <form method="POST">
+                  <button type="submit" class="btn btn-warning" asp-route-data="@user.id" asp-page-handler="RemoveFromCircle">
+                    Remove From circle 
+                  </button>
+                </form>
+              </div>
+          </div>
+        </div>
+        <br>
+      }
+      <br>
+      <p class="title is-4">Add users to this circle:</p>
+      @foreach (dynamic user  in RemainingUsers)
+      {
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img class="is-rounded" src="@user.avatar" alt="Avatar">
+                </figure>
+              </div>
+
+              <div class="media-content">
+                  <p class="title is-6">@user.username</p>
+                  <p class="subtitle is-6">
+                    <a href="/Profile?username=@user.username">
+                       @user.username
+                    </a>
+                  </p>
+              </div>
+
+            </div>
+              <div class="buttons">
+                <form method="POST">
+                  <button type="submit" class="btn btn-primary" asp-route-data="@user.id" asp-page-handler="AddToCircle">
+                    Add To circle 
+                  </button>
+                </form>
+              </div>
+          </div>
+        </div>
+        <br>
+      }
+    </div>
+  </div>
+  <br>
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Danger Zone
+      </p>
+    </header>
+    <div class="card-content">
+       <div class="buttons">
+        <form method="POST">
+          <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="DeleteCircle">
+            Delete Circle
+          </button>
+        </form>
+       </div>
+    </div>
+  </div>
+
+</div>

@@ -3,6 +3,7 @@
 
 @{
     Layout = "_LayoutApp";
+    dynamic Circles = (dynamic) StorageManager.storage.Get("circles");
 }
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
@@ -53,6 +54,41 @@
   </div>
 </nav>
 
+
 <div class="container">
-    Circles Coming soon
+
+  <form class="text-center " asp-action="form" method="post">
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input class="input" type="text" placeholder="Circle Name" aria-describedby="circlename" asp-for="CircleName">
+        </div>
+
+        <div class="control">
+          <button class="button is-primary">
+            <i class="fas fa-plus-square"></i>  Create Circle
+          </button>
+        </div>
+      </div>
+  </form>
+
+  @foreach(dynamic Circle in Circles)
+  {
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          @Circle.name
+        </p>
+      </header>
+      <div class="card-content">
+        <div class="buttons">
+          <a href="/ManageCircle?name=@Circle.name">
+            <button type="submit" class="btn btn-info">
+             Manage Circle 
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <br>
+  }
 </div>

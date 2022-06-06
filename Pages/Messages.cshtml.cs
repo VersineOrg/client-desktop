@@ -16,15 +16,15 @@ namespace client_desktop.Pages
     {
         public async Task OnGetAsync()
         {
-            List<string> friends = (List<string>) StorageManager.storage.Get("friends");
 
+            Newtonsoft.Json.Linq.JArray friends = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("friends");
             List<dynamic> fullFriends = new List<dynamic>();
 
-            foreach (string friendId in friends)
+            foreach (dynamic friendId in friends)
             {
                 using var client = new HttpClient();
 
-                string baseurl = "https://api.versine.fr/users/userById/" + friendId;
+                string baseurl = "https://api.versine.fr/users/userById/" + (string) friendId;
 
                 string token = StorageManager.storage.Get("token").ToString();
                 ProfileFormat bodyObject = new ProfileFormat()
