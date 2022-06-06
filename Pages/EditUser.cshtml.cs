@@ -39,7 +39,7 @@ namespace client_desktop.Pages
 
             string Color = (string) StorageManager.storage.Get("color");
             Bio = (Bio != null) ? Bio : (string) StorageManager.storage.Get("bio");
-            Avatar = (Avatar != null) ? Bio : (string) StorageManager.storage.Get("avatar");
+            Avatar = (Avatar != null) ? Avatar : (string) StorageManager.storage.Get("avatar");
             Banner = (Banner != null) ? Banner : (string) StorageManager.storage.Get("banner");
 
             EditUserFormat bodyObject = new EditUserFormat()

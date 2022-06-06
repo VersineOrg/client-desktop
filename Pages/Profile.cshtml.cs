@@ -16,7 +16,7 @@ namespace client_desktop.Pages
     {
 
         public string? token { get; set; }
-        public string? requestedUserName { get; set; }
+        public string? requesteduserid { get; set; }
     }
 
     public class ProfileModel : PageModel
@@ -26,11 +26,11 @@ namespace client_desktop.Pages
             using var client = new HttpClient();
             string baseurl = "https://api.versine.fr/users/requestFriend";
             string token = StorageManager.storage.Get("token").ToString();
-            string username = StorageManager.storage.Get("queryUsername").ToString();
+            string userid = StorageManager.storage.Get("queryId").ToString();
             RequestFriendFormat bodyObject = new RequestFriendFormat()
             {
                 token = token,
-                requestedUserName = username
+                requesteduserid = userid
             };
 
             string requestBody = JsonConvert.SerializeObject(bodyObject);
