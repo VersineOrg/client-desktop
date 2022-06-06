@@ -88,35 +88,37 @@
     </div>
   </div>
 </div>
+</br>
+
+<h1>Timeline: </h1>
+<br>
 
 <div class="container">
 
   @foreach (dynamic post in Timeline)
   {
     <div class="card">
-      @post.UserId
-      @post.Message
-    </div>
-
-  }
-    @* <div class="card">
       <div class="card-content">
         <div class="media">
+
           <div class="media-left">
             <figure class="image is-48x48">
-              <img class="is-rounded" src="@Avatar" alt="Avatar">
+              <img class="is-rounded" src="@post.Useravatar" alt="Avatar">
             </figure>
           </div>
+
           <div class="media-content">
-            <p class="title is-4">@post.UserId</p>
-            <p class="subtitle is-6">
-              <a href="/Profile?username=@Username">
-                @post.UserId
-              </a>
-            </p>
+              <p class="title is-4">@post.Username</p>
+              <p class="subtitle is-6">
+                <a href="/Profile?username=@post.Username">
+                  @post.Username
+                </a>
+              </p>
           </div>
-      </div> 
 
-      @post.Message *@
-
-</div>
+        </div>
+        <br>
+        @post.Message
+      </div>
+    </div>
+  }
