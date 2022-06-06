@@ -47,7 +47,7 @@
             <i class="fa-solid fa-message"></i>
           </a>
 
-          <a id="timeline" href="/Timeline" class="button">
+          <a id="timeline" href="/Inbox" class="button">
             <i class="fas fa-inbox"></i>
           </a>
 
@@ -90,11 +90,15 @@
 </div>
 </br>
 
-<h1>Timeline: </h1>
-<br>
 
 <div class="container">
 
+@if (Timeline.Count > 0)
+{
+  <h1 class="title">Timeline: </h1>
+
+  <br>
+}
   @foreach (dynamic post in Timeline)
   {
     <div class="card">
@@ -120,6 +124,18 @@
         <br>
         @post.Message
       </div>
+      <footer class="card-footer">
+        <form method="POST">
+          <button class="button is-link is-light" asp-route-data="up,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-up"></i> Upvote</button>
+        </form>
+        <div href="#" class="card-footer-item">
+          @{ int counter = (int) post.Upvoter.Count - (int) post.Downvoter.Count;}
+          @counter
+        </div>
+        <form method="POST">
+          <button class="button is-link is-light" asp-route-data="down,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-down"></i> Downvote</button>
+        </form>
+      </footer>
     </div>
     <br>
   }

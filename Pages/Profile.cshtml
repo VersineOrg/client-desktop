@@ -4,11 +4,26 @@
 @{
     Layout = "_LayoutApp";
     string Username = (string) StorageManager.storage.Get("queryUsername");
+    string myUsername = (string) StorageManager.storage.Get("username");
     string Avatar = (string) StorageManager.storage.Get("queryAvatar");
     string Bio = (string) StorageManager.storage.Get("queryBio");
     string Banner = (string) StorageManager.storage.Get("queryBanner");
     string Color = (string) StorageManager.storage.Get("queryColor");
     string Id = (string) StorageManager.storage.Get("queryId");
+    dynamic Timeline = (dynamic) StorageManager.storage.Get("queryTimeline");
+
+    Newtonsoft.Json.Linq.JArray friends = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("friends");
+
+    bool myProfile = (myUsername == Username) && (Id != "1234");
+    bool myFriend = false;
+
+    foreach (string friendId in friends)
+    {
+      if (friendId == Id)
+      {
+        myFriend = true;
+      }
+    }
 }
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
@@ -46,7 +61,7 @@
              <i class="fa-solid fa-message"></i>
           </a>
           
-          <a id="timeline" href="/Timeline" class="button">
+          <a id="timeline" href="/Inbox" class="button">
             <i class="fas fa-inbox"></i>
           </a>
 
@@ -84,13 +99,74 @@
                     @Bio 
                 </div>
                 <footer class="card-footer">
-                    <form method="POST">
-                        <button type="submit" class="card-footer-item button is-primary" asp-route-data="foo" asp-page-handler="RequestFriend">
-                            Request Friend
-                        </button>
-                    </form>
-
+                  @if (!myProfile)
+                  {
+                    @if (!myFriend)
+                    {
+                      <form method="POST">
+                          <button type="submit" class="card-footer-item button is-primary" asp-route-data="@Username" asp-page-handler="RequestFriend">
+                              Request Friend
+                          </button>
+                      </form>
+                    }
+                    else
+                    {
+                      <form method="POST">
+                          <button type="submit" class="card-footer-item button is-warning" asp-route-data="@Username" asp-page-handler="Unfriend">
+                             Unfriend 
+                          </button>
+                      </form>
+                    }
+                  }
                 </footer>
         </div>
     </div>
 </div>
+@if (Timeline.Count > 0)
+{
+  <br>
+  <div class="container">
+  <h1 class="title">User Posts: </h1>
+  <br>
+    @foreach (dynamic post in Timeline)
+      {
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img class="is-rounded" src="@post.Useravatar" alt="Avatar">
+                </figure>
+              </div>
+
+              <div class="media-content">
+                  <p class="title is-4">@post.Username</p>
+                  <p class="subtitle is-6">
+                    <a href="/Profile?username=@post.Username">
+                      @post.Username
+                    </a>
+                  </p>
+              </div>
+
+            </div>
+            <br>
+            @post.Message
+          </div>
+          <footer class="card-footer">
+            <form method="POST">
+              <button class="button is-link is-light" asp-route-data="up,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-up"></i> Upvote</button>
+            </form>
+            <div href="#" class="card-footer-item">
+              @{ int counter = (int) post.Upvoter.Count - (int) post.Downvoter.Count;}
+              @counter
+            </div>
+            <form method="POST">
+              <button class="button is-link is-light" asp-route-data="down,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-down"></i> Downvote</button>
+            </form>
+          </footer>
+        </div>
+        <br>
+      }
+  </div>
+}

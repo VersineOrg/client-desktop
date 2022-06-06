@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace client_desktop.Pages
 {
     
-    public class SearchModel : PageModel
+    public class InboxModel : PageModel
     {
 
         [BindProperty]

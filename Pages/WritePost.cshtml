@@ -3,6 +3,8 @@
 
 @{
     Layout = "_LayoutApp";
+    Newtonsoft.Json.Linq.JArray Circles = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("circles");
+    string Token = (string) StorageManager.storage.Get("token");
 }
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
@@ -40,7 +42,7 @@
              <i class="fa-solid fa-message"></i>
           </a>
           
-          <a id="timeline" href="/Timeline" class="button">
+          <a id="timeline" href="/Inbox" class="button">
             <i class="fas fa-inbox"></i>
           </a>
 
@@ -54,7 +56,6 @@
 </nav>
 
 <div class="container">
-    <button id="circle" class="tag is-light">Primary</button> 
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
@@ -62,28 +63,74 @@
             </p>
         </header>
         <div class="card-content">
-            <form asp-action="form" method="post">
                 <div class="field">
                     <label class="label">Content</label>
                     <div class="control">
-                        <textarea asp-for="Content" class="textarea" placeholder="Today I ate a banana"></textarea>
+                        <textarea id="content" class="textarea" placeholder="Today I ate a banana"></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Select circles</label>
+                    <div class="control">
+                      @foreach (dynamic circle in Circles)
+                      {
+                        <span id="circle" class="tag is-light is-medium" circleid="@circle.id">@circle.name</span> 
+                      }
+
+                      <small id="ticketHelpBlock" class="form-text text-muted mb-4">
+                        By selecting no circles your post will be visible to all your friends
+                      </small>
                     </div>
                 </div>
                 <div>
                     <p></p>
-                    <button type="submit" class="button is-link">Post</button>
+                    <button type="submit" class="button is-link" onclick="addPost()">Post</button>
                     <p></p>
                 </div>
-            </form>
+
         </div>
     </div>
     
 </div>
 
 <script>
-  var listItem = document.getElementById('circle');
-        listItem.addEventListener('click', function(event) {
-          this.classList.toggle('is-light');
-          this.classList.toggle('is-primary');
-        });
+var selectedCircles = []
+
+var buttonArray = document.querySelectorAll('#circle')
+document.querySelectorAll('#circle').forEach(function(i) {
+  i.addEventListener('click', function(e) {
+      this.classList.toggle('is-light')
+      this.classList.toggle('is-primary')
+      if (selectedCircles.indexOf(this.getAttribute("circleid")) == -1)
+      {
+        selectedCircles.push(this.getAttribute("circleid"))
+      }
+      else {
+        selectedCircles.splice(selectedCircles.indexOf(this.innerHTML), 1);
+      }
+      console.log(selectedCircles)
+  })
+});
+
+function addPost()
+{
+    var data = {
+        token: "@Token",
+        message: document.getElementById("content").value,
+        media: "",
+        circles: selectedCircles
+    };
+
+    var json = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.versine.fr/posts/addPost");
+    xhr.withCredentials = false;
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(json);
+
+    //window.location = '/App'
+}
+
 </script>
