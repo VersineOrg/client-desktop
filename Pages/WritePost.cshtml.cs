@@ -12,6 +12,7 @@ namespace client_desktop.Pages
      {
          public string token { get; set; }
          public string message { get; set;}
+         public string media { get; set;}
      }
     public class WritePost : PageModel
     {
@@ -26,7 +27,8 @@ namespace client_desktop.Pages
             PostFormat bodyObject = new PostFormat()
             {
                 token = token,
-                message = Content
+                message = Content,
+                media = ""
             };
             string requestBody = JsonConvert.SerializeObject(bodyObject);
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");

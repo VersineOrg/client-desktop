@@ -9,6 +9,8 @@
     string Banner = (string) StorageManager.storage.Get("banner");
     string Color = (string) StorageManager.storage.Get("color");
     string Id = (string) StorageManager.storage.Get("id");
+    string Ticket = (string) StorageManager.storage.Get("ticket");
+    string TicketCount = (string) StorageManager.storage.Get("ticketCount");
 
 }
 
@@ -63,6 +65,30 @@
 <br>
 
 <div class="container">
+
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        My Ticket
+      </p>
+    </header>
+
+    <div class="card-content">
+      <div class="media-content">
+          <p class="title is-4">
+            <span class="tag is-primary is-light is-medium">
+              @Ticket
+            </span>
+            </p>
+          <p class="subtitle is-6">
+            <span class="tag is-info is-light">@TicketCount</span> uses left
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
   <div class="card">
     <header class="card-header">
       <p class="card-header-title">
@@ -91,13 +117,31 @@
           </button>
         </form>
 
-        <form method="POST">
-          <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="Delete">
-            Delete My Account
+        <a href="/EditUser">
+          <button type="submit" class="btn btn-info">
+            Edit My Profile
           </button>
-        </form>
+        </a>
        </div>
 
     </div>
   </div>
+  <br>
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Danger Zone
+      </p>
+    </header>
+    <div class="card-content">
+       <div class="buttons">
+        <a href="/DeleteUser">
+          <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="Delete">
+            Delete My Account
+          </button>
+        </a>
+       </div>
+    </div>
+  </div>
+
 </div>

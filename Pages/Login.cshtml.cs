@@ -24,6 +24,7 @@ namespace client_desktop.Pages
         {
             _logger = logger;
         }
+
         [BindProperty]
         public string? Username { get; set; }
         [BindProperty]
@@ -51,7 +52,7 @@ namespace client_desktop.Pages
             }
             else
             {
-                return RedirectToPage("/Error", new { msg = "Invalid Credentials" });
+                return RedirectToPage("/Door", new { msg = "Invalid Credentials" });
             }
 
         }

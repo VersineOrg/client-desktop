@@ -14,6 +14,12 @@ namespace client_desktop.Pages
     {
         public void OnGet()
         {
+            List<string> friends = (List<string>) StorageManager.storage.Get("friends");
+
+            foreach (string friend in friends)
+            {
+                Console.WriteLine(friend);
+            }
             
         }
         

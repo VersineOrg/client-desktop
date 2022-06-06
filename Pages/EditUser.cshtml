@@ -1,0 +1,103 @@
+﻿@page 
+@model EditUserModel
+@{
+    ViewData["Title"] = "Edit User";
+    string Username = (string) StorageManager.storage.Get("username");
+    string Avatar = (string) StorageManager.storage.Get("avatar");
+    string Bio = (string) StorageManager.storage.Get("bio");
+    string Banner = (string) StorageManager.storage.Get("banner");
+    string Color = (string) StorageManager.storage.Get("color");
+    string Id = (string) StorageManager.storage.Get("id");
+
+}
+
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+     <div class="navbar-item">
+    <a class="navbar-item button"  href="/Settings">
+     <i class="fas fa-arrow-left"></i>
+    </a>
+    </div>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+            <i class="fa-solid fa-message"></i>
+          </a>
+
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Edit My Profile
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input type="text" id="avatar" class="input" name="avatar" value="@Avatar" placeholder="Avatar image url" asp-for="Avatar">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input type="text" id="banner" class="input" name="Banner" value="@Banner" placeholder="Banner image url" asp-for="Banner">
+            <span class="icon is-small is-left">
+              <i class="fas fa-image"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="label">Bio</label>
+            <div class="control">
+                <textarea asp-for="Bio" class="textarea" placeholder="About me" value="@Bio">@Bio</textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info" asp-route-data="foo" asp-page-handler="Edit">
+          Edit My Profile
+        </button>
+      </form>
+  </div>
+</div>

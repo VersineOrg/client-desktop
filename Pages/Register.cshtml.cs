@@ -48,12 +48,14 @@ namespace client_desktop.Pages
             var result = await client.PostAsync("https://api.versine.fr/door/register", httpContent);
             string? bodyString = await result.Content.ReadAsStringAsync();
             dynamic json = JsonConvert.DeserializeObject(bodyString)!;
-            
-            StorageManager.storage.Store("token", json.data);
-            StorageManager.storage.Store("username", Username);
-            
-            return RedirectToPage("/App", new { msg = "Success" });
-
+            if ((string) json.status == "success") {
+                StorageManager.storage.Store("token", json.data);
+                StorageManager.storage.Store("username", Username);
+                return RedirectToPage("/App", new { msg = "Success" });
+            }
+            else {
+                return RedirectToPage("/Door", new { msg = "Error with registering this account" });
+            }
         }
         
         public void OnGet()

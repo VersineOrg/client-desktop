@@ -9,7 +9,7 @@
     string Banner = (string) StorageManager.storage.Get("banner");
     string Color = (string) StorageManager.storage.Get("color");
     string Id = (string) StorageManager.storage.Get("id");
-
+    dynamic Timeline = (dynamic) StorageManager.storage.Get("timeline");
 }
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
@@ -87,4 +87,36 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="container">
+
+  @foreach (dynamic post in Timeline)
+  {
+    <div class="card">
+      @post.UserId
+      @post.Message
+    </div>
+
+  }
+    @* <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img class="is-rounded" src="@Avatar" alt="Avatar">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">@post.UserId</p>
+            <p class="subtitle is-6">
+              <a href="/Profile?username=@Username">
+                @post.UserId
+              </a>
+            </p>
+          </div>
+      </div> 
+
+      @post.Message *@
+
 </div>

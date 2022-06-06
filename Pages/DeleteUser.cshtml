@@ -1,0 +1,80 @@
+﻿@page 
+@model DeleteUserModel
+@{
+    ViewData["Title"] = "DeleteUser";
+}
+
+<nav class="navbar navvvv" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+     <div class="navbar-item">
+    <a class="navbar-item button"  href="/Settings">
+     <i class="fas fa-arrow-left"></i>
+    </a>
+    </div>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    
+    <div class="navbar-start scrooll" id="guilds">
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a id="addaguildbutton" href="/WritePost" class="button is-primary">
+            <strong><i class="fas fa-plus-square"></i></strong>
+          </a>
+
+          <a id="circles" href="/Circles" class="button">
+            <i class="fa-solid fa-circle-nodes"></i>
+          </a>
+
+          <a id="profilesearch" href="/Messages" class="button">
+            <i class="fa-solid fa-message"></i>
+          </a>
+
+          <a id="timeline" href="/Timeline" class="button">
+            <i class="fas fa-inbox"></i>
+          </a>
+
+          <a id="messages" href="/Search" class="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+<div class="container">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Delete My Account
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="POST">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input type="password" id="password" class="input" name="password" placeholder="Confirm Password" asp-for="Password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+        <button type="submit" class="btn btn-danger" asp-route-data="foo" asp-page-handler="Delete">
+          Delete My Account
+        </button>
+      </form>
+
+  </div>
+
+</div>
