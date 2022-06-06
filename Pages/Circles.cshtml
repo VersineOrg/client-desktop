@@ -65,7 +65,7 @@
 
         <div class="control">
           <button class="button is-primary">
-            <i class="fas fa-plus-square"></i>  Create Circle
+            <i class="fas fa-plus-square"></i>&nbsp;Create Circle
           </button>
         </div>
       </div>
@@ -76,14 +76,17 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          @Circle.name
+          @Circle.name 
         </p>
       </header>
       <div class="card-content">
+        <span class="tag is-info is-light is-medium">@Circle.users.Count</span>&nbsp; members 
+        <br>
+        <br>
         <div class="buttons">
           <a href="/ManageCircle?name=@Circle.name">
             <button type="submit" class="btn btn-info">
-             Manage Circle 
+              <i class="fa-solid fa-sliders"></i>&nbsp;Manage Circle 
             </button>
           </a>
         </div>

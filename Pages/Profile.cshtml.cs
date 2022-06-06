@@ -124,8 +124,6 @@ namespace client_desktop.Pages
                     };
                 }
 
-                
-
                 string requestBody2 = JsonConvert.SerializeObject(bodyObject2);
                 var httpContent2 = new StringContent(requestBody2, Encoding.UTF8, "application/json");
                 var result2 = await client2.PostAsync(baseurl2, httpContent2);
