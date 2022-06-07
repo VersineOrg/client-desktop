@@ -18,7 +18,7 @@ namespace client_desktop.Pages
 
     public class App : PageModel
     {
-        public async Task OnGet()
+        public async Task OnGet(string timelineType)
         {
             using var client = new HttpClient();
 
@@ -84,8 +84,13 @@ namespace client_desktop.Pages
                 StorageManager.storage.Store("friends", friends);
 
                 using var client2 = new HttpClient();
-
-                string baseurl2 = "https://api.versine.fr/timeline/getTimeline";
+                if (timelineType == null)
+                {
+                    timelineType = "getTimeline";
+                }
+                string baseurl2 = "https://api.versine.fr/timeline/" + timelineType;
+                Console.WriteLine("=======================");
+                Console.WriteLine("TIMELINE TYPE:" + timelineType);
 
                 ProfileFormat bodyObject2 = new ProfileFormat()
                 {

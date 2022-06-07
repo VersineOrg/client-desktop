@@ -48,7 +48,7 @@ namespace client_desktop.Pages
                 StorageManager.storage.Store("token", json.data);
                 StorageManager.storage.Store("username", Username);
                         
-                return RedirectToPage("/App", new { msg = "Success" });    
+                return RedirectToPage("/App", new { timelineType = "getTimeline" });    
             }
             else
             {

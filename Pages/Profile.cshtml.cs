@@ -101,6 +101,9 @@ namespace client_desktop.Pages
         { 
             using var client = new HttpClient();
 
+            List<dynamic> emptyInit = new List<dynamic>();
+            StorageManager.storage.Store("outgoingFriendRequests", emptyInit);
+            StorageManager.storage.Store("friends", emptyInit);
             string baseurl = "https://api.versine.fr/users/user/" + username;
 
             string token = StorageManager.storage.Get("token").ToString();

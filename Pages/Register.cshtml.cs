@@ -47,6 +47,7 @@ namespace client_desktop.Pages
             var httpContent = new StringContent(requestBody, Encoding.UTF8, "application/json");
             var result = await client.PostAsync("https://api.versine.fr/door/register", httpContent);
             string? bodyString = await result.Content.ReadAsStringAsync();
+            Console.WriteLine(bodyString);
             dynamic json = JsonConvert.DeserializeObject(bodyString)!;
             if ((string) json.status == "success") {
                 StorageManager.storage.Store("token", json.data);
