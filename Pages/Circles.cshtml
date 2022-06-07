@@ -3,6 +3,7 @@
 
 @{
     Layout = "_LayoutApp";
+    ViewData["Title"] = "Circles";
     dynamic Circles = (dynamic) StorageManager.storage.Get("circles");
 }
 
@@ -70,6 +71,18 @@
         </div>
       </div>
   </form>
+
+  @if (Circles.Count > 0)
+  {
+    <h1 class="title">Your Circles: </h1>
+    <br>
+  }
+  else
+  {
+    <h2 class="title">You have no circles</h2>
+    <h2 class="subtitle">You can create a circle and add some friends in it</h2>
+    <br>
+  }
 
   @foreach(dynamic Circle in Circles)
   {

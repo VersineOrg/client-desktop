@@ -3,6 +3,7 @@
 
 @{
     Layout = "_LayoutApp";
+    ViewData["Title"] = "Settings";
     string Username = (string) StorageManager.storage.Get("username");
     string Avatar = (string) StorageManager.storage.Get("avatar");
     string Bio = (string) StorageManager.storage.Get("bio");

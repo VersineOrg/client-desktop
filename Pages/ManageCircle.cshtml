@@ -3,6 +3,7 @@
 
 @{
     Layout = "_LayoutApp";
+    ViewData["Title"] = "ManageCircle";
     string CurrentCircleName = (string) StorageManager.storage.Get("currentCircleName");
     Newtonsoft.Json.Linq.JArray RemainingUsers = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("remainingUsers");
     Newtonsoft.Json.Linq.JArray CircleUsers = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("circleUsers");
@@ -66,13 +67,13 @@
   <div class="card">
     <header class="card-header">
       <p class="card-header-title">
-        ManageCircle: <span class="tag is-info is-light is-medium">@CurrentCircleName</span>
+        Manage circle: &nbsp;<span class="tag is-info is-light is-medium">@CurrentCircleName</span>
       </p>
     </header>
 
     <div class="card-content">
-      <p class="title is-4">Users in this Circle:</p>
-      @foreach (dynamic user  in CircleUsers)
+      <p class="title is-4">Friend(s) in this circle:</p>
+      @foreach (dynamic user in CircleUsers)
       {
         <div class="card">
           <div class="card-content">
@@ -106,7 +107,7 @@
         <br>
       }
       <br>
-      <p class="title is-4">Add users to this circle:</p>
+      <p class="title is-4">Add friends to this circle:</p>
       @foreach (dynamic user  in RemainingUsers)
       {
         <div class="card">
@@ -161,3 +162,5 @@
   </div>
 
 </div>
+
+<br>

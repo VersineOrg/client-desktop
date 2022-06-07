@@ -4,6 +4,7 @@
 @{
     Layout = "_LayoutApp";
     string Username = (string) StorageManager.storage.Get("queryUsername");
+    ViewData["Title"] = Username;
     string myUsername = (string) StorageManager.storage.Get("username");
     string Avatar = (string) StorageManager.storage.Get("queryAvatar");
     string Bio = (string) StorageManager.storage.Get("queryBio");
@@ -13,15 +14,25 @@
     dynamic Timeline = (dynamic) StorageManager.storage.Get("queryTimeline");
 
     Newtonsoft.Json.Linq.JArray friends = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("friends");
+    Newtonsoft.Json.Linq.JArray outgoingFriendRequests = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("outgoingFriendRequests");
 
     bool myProfile = (myUsername == Username) && (Id != "1234");
     bool myFriend = false;
+    bool pending = false;
 
     foreach (string friendId in friends)
     {
       if (friendId == Id)
       {
         myFriend = true;
+      }
+    }
+
+    foreach (string userId in outgoingFriendRequests)
+    {
+      if (userId == Id)
+      {
+        pending = true;
       }
     }
 }
@@ -103,11 +114,20 @@
                   {
                     @if (!myFriend)
                     {
-                      <form method="POST">
+                      @if (pending)
+                      {
+                        <button class="card-footer-item button is-light">
+                          Friend Request Pending
+                        </button>
+                      }
+                      else
+                      {
+                        <form method="POST">
                           <button type="submit" class="card-footer-item button is-primary" asp-route-data="@Username" asp-page-handler="RequestFriend">
                               Request Friend
                           </button>
-                      </form>
+                        </form>
+                      }
                     }
                     else
                     {
@@ -154,16 +174,32 @@
             @post.Message
           </div>
           <footer class="card-footer">
-            <form method="POST">
-              <button class="button is-link is-light" asp-route-data="up,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-up"></i> Upvote</button>
-            </form>
+
+            <div href="#" class="card-footer-item">
+              <form method="POST">
+                <button class="button is-link is-light" asp-route-data="up,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-up"></i>&nbsp;Upvote</button>
+              </form>
+            </div>
+
             <div href="#" class="card-footer-item">
               @{ int counter = (int) post.Upvoter.Count - (int) post.Downvoter.Count;}
               @counter
             </div>
-            <form method="POST">
-              <button class="button is-link is-light" asp-route-data="down,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-down"></i> Downvote</button>
-            </form>
+
+            <div href="#" class="card-footer-item">
+              <form method="POST">
+                <button class="button is-link is-light" asp-route-data="down,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-down"></i>&nbsp;Downvote</button>
+              </form>
+            </div>
+
+            @if (myProfile)
+            {
+              <div href="#" class="card-footer-item">
+                <form method="POST">
+                  <button class="button is-danger is-light" asp-route-data="@post.id" asp-page-handler="DeletePost"><i class="fa-solid fa-trash-can"></i>&nbsp;Delete Post</button>
+                </form>
+              </div>
+            }
           </footer>
         </div>
         <br>

@@ -40,7 +40,6 @@ namespace client_desktop.Pages
                 string baseurl = "http://api.versine.fr/users/deleteUser";
                 var result = await client.PostAsync(baseurl, httpContent);
                 string? bodyString = await result.Content.ReadAsStringAsync();
-                Console.WriteLine(bodyString);
                 dynamic json = JsonConvert.DeserializeObject(bodyString)!;
                 
                 if ((string) json.status == "success")

@@ -3,6 +3,7 @@
 
 @{
     Layout = "_LayoutApp";
+    ViewData["Title"] = "App";
     string Username = (string) StorageManager.storage.Get("username");
     string Avatar = (string) StorageManager.storage.Get("avatar");
     string Bio = (string) StorageManager.storage.Get("bio");
@@ -14,13 +15,14 @@
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-       <div class="navbar-item">
-        <a class="navbar-item button"  href="/App">
-         <i class="fa-solid fa-house"></i>
-        </a>
-      </div>
+    <div class="navbar-item">
+      <a class="navbar-item button" href="/App">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </div>
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+      data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -77,28 +79,34 @@
           <p class="title is-4">@Username</p>
           <p class="subtitle is-6"><a href="/Profile?username=@Username">@Username</a></p>
         </div>
-        
+
         <div class="buttons">
           <a href="/Settings">
             <button id="settings" class="button">
               <i class="fas fa-sliders-h"></i>&nbsp;Settings
             </button>
           </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </br>
 
 
 <div class="container">
 
-@if (Timeline.Count > 0)
-{
-  <h1 class="title">Timeline: </h1>
+  @if (Timeline.Count > 0)
+  {
+    <h1 class="title">Timeline: </h1>
+    <br>
+  }
+  else
+  {
+    <h1 class="title">Your timeline is empty</h1>
+    <h2 class="subtitle">Here are being displayed your friend's posts</h2>
+    <br>
+  }
 
-  <br>
-}
   @foreach (dynamic post in Timeline)
   {
     <div class="card">
@@ -112,12 +120,12 @@
           </div>
 
           <div class="media-content">
-              <p class="title is-4">@post.Username</p>
-              <p class="subtitle is-6">
-                <a href="/Profile?username=@post.Username">
-                  @post.Username
-                </a>
-              </p>
+            <p class="title is-4">@post.Username</p>
+            <p class="subtitle is-6">
+              <a href="/Profile?username=@post.Username">
+                @post.Username
+              </a>
+            </p>
           </div>
 
         </div>
@@ -125,17 +133,28 @@
         @post.Message
       </div>
       <footer class="card-footer">
-        <form method="POST">
-          <button class="button is-link is-light" asp-route-data="up,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-up"></i> Upvote</button>
-        </form>
         <div href="#" class="card-footer-item">
-          @{ int counter = (int) post.Upvoter.Count - (int) post.Downvoter.Count;}
+          <form method="POST">
+            <button class="button is-link is-light" asp-route-data="up,@post.id" asp-page-handler="Vote"><i
+              class="fa-solid fa-arrow-up"></i> &nbsp;Upvote</button>
+          </form>
+        </div>
+
+        <div href="#" class="card-footer-item">
+          @{
+            int counter = (int)post.Upvoter.Count - (int)post.Downvoter.Count;
+          }
           @counter
         </div>
-        <form method="POST">
-          <button class="button is-link is-light" asp-route-data="down,@post.id" asp-page-handler="Vote"><i class="fa-solid fa-arrow-down"></i> Downvote</button>
-        </form>
+
+        <div href="#" class="card-footer-item">
+          <form method="POST">
+            <button class="button is-link is-light" asp-route-data="down,@post.id" asp-page-handler="Vote"><i
+              class="fa-solid fa-arrow-down"></i> &nbsp;Downvote</button>
+          </form>
+        </div>
       </footer>
     </div>
     <br>
   }
+</div>

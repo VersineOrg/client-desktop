@@ -44,13 +44,6 @@ namespace client_desktop.Pages
                     fullFriends.Add(profile);
                 }
             }
-
-            foreach (dynamic friend in fullFriends)
-            {
-                Console.WriteLine(friend);
-            }
-            
         }
-        
     }
 }

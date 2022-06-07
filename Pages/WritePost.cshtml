@@ -3,6 +3,7 @@
 
 @{
     Layout = "_LayoutApp";
+    ViewData["Title"] = "WritePost";
     Newtonsoft.Json.Linq.JArray Circles = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("circles");
     string Token = (string) StorageManager.storage.Get("token");
 }
@@ -70,19 +71,34 @@
                     </div>
                 </div>
 
-                <div class="field">
-                    <label class="label">Select circles</label>
-                    <div class="control">
-                      @foreach (dynamic circle in Circles)
-                      {
-                        <span id="circle" class="tag is-light is-medium" circleid="@circle.id">@circle.name</span> 
-                      }
-
-                      <small id="ticketHelpBlock" class="form-text text-muted mb-4">
-                        By selecting no circles your post will be visible to all your friends
-                      </small>
-                    </div>
-                </div>
+                @if (Circles.Count > 0)
+                {
+                  <div class="field">
+                      <label class="label">Select circles</label>
+                      <div class="control">
+                        @foreach (dynamic circle in Circles)
+                        {
+                          <span id="circle" class="tag is-light is-medium" circleid="@circle.id">@circle.name</span> 
+                        }
+                        <small id="ticketHelpBlock" class="form-text text-muted mb-4">
+                          Only the friends present in the selected circles will be able to see this post
+                        </small>
+                        <small id="ticketHelpBlock" class="form-text text-muted mb-4">
+                          By selecting no circles your post will be visible to all your friends
+                        </small>
+                      </div>
+                  </div>
+                }
+                else
+                {
+                  <div class="field">
+                    <label class="label">You have no circles yet</label>
+                    <small id="ticketHelpBlock" class="form-text text-muted mb-4">
+                      <a href="/Circles">Create your first circle</a>
+                    </small>
+                  </div>
+                }
+                
                 <div>
                     <p></p>
                     <button type="submit" class="button is-link" onclick="addPost()">Post</button>
@@ -130,7 +146,7 @@ function addPost()
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(json);
 
-    //window.location = '/App'
+    window.location = '/App'
 }
 
 </script>

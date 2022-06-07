@@ -1,7 +1,8 @@
 @page
 @model InboxModel
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Inbox";
+    Newtonsoft.Json.Linq.JArray IncomingFriendRequests = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("incomingFriendRequests");
 }
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
@@ -54,19 +55,41 @@
 <br>
 
 <div class="container">
+  <h1 class="title">Incoming Friend Requests: </h1>
+  @if (IncomingFriendRequests.Count > 0)
+  {
+    @foreach (dynamic user  in IncomingFriendRequests)
+    {
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
 
-    <form class="text-center " asp-action="form" method="post">
-      <div class="field has-addons">
-        <div class="control is-expanded">
-          <input class="input" type="text" placeholder="Username" aria-describedby="username" asp-for="Username">
-        </div>
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img class="is-rounded" src="@user.avatar" alt="Avatar">
+              </figure>
+            </div>
 
-        <div class="control">
-          <button class="button is-primary">
-            Search
-          </button>
+            <div class="media-content">
+                <p class="title is-6">@user.username</p>
+                <p class="subtitle is-6">
+                  <a href="/Profile?username=@user.username">
+                    @user.username
+                  </a>
+                </p>
+            </div>
+
+          </div>
+            <div class="buttons">
+              <form method="POST">
+                <button type="submit" class="btn btn-info" asp-route-data="@user.id" asp-page-handler="AcceptFriendRequest">
+                  Accept Friend Request 
+                </button>
+              </form>
+            </div>
         </div>
       </div>
-    </form>
-
+      <br>
+    }
+  }
 </div>
