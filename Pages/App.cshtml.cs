@@ -84,13 +84,11 @@ namespace client_desktop.Pages
                 StorageManager.storage.Store("friends", friends);
 
                 using var client2 = new HttpClient();
-                if (timelineType == null)
+                if (timelineType == null || (timelineType != "getTimeline") || (timelineType != "getCoolTimeline"))
                 {
                     timelineType = "getTimeline";
                 }
                 string baseurl2 = "https://api.versine.fr/timeline/" + timelineType;
-                Console.WriteLine("=======================");
-                Console.WriteLine("TIMELINE TYPE:" + timelineType);
 
                 ProfileFormat bodyObject2 = new ProfileFormat()
                 {
