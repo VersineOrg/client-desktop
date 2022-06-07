@@ -71,6 +71,16 @@
                     </div>
                 </div>
 
+                <div class="field">
+                  <label class="label">Image url</label>
+                  <p class="control has-icons-left">
+                    <input id="imageurl" class="input" type="text" placeholder="Image url">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-image"></i>
+                    </span>
+                  </p>
+                </div>
+
                 @if (Circles.Count > 0)
                 {
                   <div class="field">
@@ -131,22 +141,44 @@ document.querySelectorAll('#circle').forEach(function(i) {
 
 function addPost()
 {
-    var data = {
-        token: "@Token",
-        message: document.getElementById("content").value,
-        media: "",
-        circles: selectedCircles
-    };
+    var content = document.getElementById("content").value
+    var imageurl = document.getElementById("imageurl").value
 
-    var json = JSON.stringify(data);
+    var message = ""
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://api.versine.fr/posts/addPost");
-    xhr.withCredentials = false;
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(json);
+    if (content != null)
+    {
+      if (imageurl != null)
+      {
+        message += content
+        message += "&imgurlsrc;"
+        message += imageurl
+      }
+      else
+      {
+        message += content
+      }
+    }
 
-    window.location = '/App'
+    if (message != "" && content != null)
+    {
+      var data = {
+          token: "@Token",
+          message: message,
+          media: "",
+          circles: selectedCircles
+      };
+
+      var json = JSON.stringify(data);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://api.versine.fr/posts/addPost");
+      xhr.withCredentials = false;
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(json);
+
+      window.location = '/App'
+    }
 }
 
 </script>

@@ -171,7 +171,33 @@
 
             </div>
             <br>
-            @post.Message
+            @{
+              string content = (string) post.Message;
+              string text;
+              string image;
+              if (content.Contains("&imgurlsrc;"))
+              {
+                string[] parts = content.Split("&imgurlsrc;");
+                text = parts[0];
+                image = parts[1];
+              }
+              else
+              {
+                text = content;
+                image = "";
+              }
+            }
+            @if (image != "")
+            {
+              <img src="@image" width="200px" height="auto">
+              <br>
+            }
+
+              <h2 class="subtitle">
+                @text
+              </h2>
+
+            
           </div>
           <footer class="card-footer">
 
