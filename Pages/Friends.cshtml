@@ -1,7 +1,8 @@
 @page
-@model SearchModel
+@model FriendsModel
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Friends";
+    Newtonsoft.Json.Linq.JArray Friends = (Newtonsoft.Json.Linq.JArray) StorageManager.storage.Get("fullFriends");
 }
 
 <nav class="navbar navvvv" role="navigation" aria-label="main navigation">
@@ -52,21 +53,46 @@
 </nav>
 
 <br>
-
 <div class="container">
+<p class="title is-4">Your friend(s)</p>
+      @if (Friends.Count > 0)
+      {
+        @foreach (dynamic friend in Friends)
+        {
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
 
-    <form class="text-center " asp-action="form" method="post">
-      <div class="field has-addons">
-        <div class="control is-expanded">
-          <input class="input" type="text" placeholder="Username" aria-describedby="username" asp-for="Username">
-        </div>
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img class="is-rounded" src="@friend.avatar" alt="Avatar">
+                  </figure>
+                </div>
 
-        <div class="control">
-          <button class="button is-primary">
-            Search
-          </button>
-        </div>
-      </div>
-    </form>
+                <div class="media-content">
+                    <p class="title is-6">@friend.username</p>
+                    <p class="subtitle is-6">
+                      <a href="/Profile?username=@friend.username">
+                        @friend.username
+                      </a>
+                    </p>
+                </div>
 
+              </div>
+                <div class="buttons">
+                  <form method="POST">
+                    <button type="submit" class="btn btn-warning" asp-route-data="@friend.id" asp-page-handler="Unfriend">
+                      Unfriend
+                    </button>
+                  </form>
+                </div>
+            </div>
+          </div>
+          <br>
+        }
+      }
+      else
+      {
+        <h2 class="subtitle">You have no friends yet</h2>
+      }
 </div>
