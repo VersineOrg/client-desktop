@@ -122,11 +122,14 @@
                       }
                       else
                       {
-                        <form method="POST">
-                          <button type="submit" class="card-footer-item button is-primary" asp-route-data="@Username" asp-page-handler="RequestFriend">
-                              Request Friend
-                          </button>
-                        </form>
+                        @if (Id != "1234")
+                        {
+                          <form method="POST">
+                            <button type="submit" class="card-footer-item button is-primary" asp-route-data="@Username" asp-page-handler="RequestFriend">
+                                Request Friend
+                            </button>
+                          </form>
+                        }
                       }
                     }
                     else
